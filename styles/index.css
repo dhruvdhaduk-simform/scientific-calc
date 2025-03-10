@@ -9,6 +9,12 @@
 :root {
     --calc-width: 22rem;
     --calc-height: 36rem;
+    --main-padding: 0.35rem;
+
+    --display-height: 5rem;
+    --display-padding: 0.5rem;
+    --display-font-size: 3rem;
+    --display-margin-bottom: 3rem;
 }
 
 html {
@@ -30,4 +36,25 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
+}
+
+main {
+    padding: var(--main-padding);
+}
+
+.display {
+    height: var(--display-height);
+    padding: var(--display-padding);
+
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.display-text {
+    font-size: var(--display-font-size);
+    font-weight: 500;
+    text-wrap-mode: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
 }
