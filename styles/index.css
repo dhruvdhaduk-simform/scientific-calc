@@ -7,6 +7,27 @@
 }
 
 :root {
+    --calc-width: 22rem;
+    --calc-height: 36rem;
+}
+
+html {
     background-color: black;
-    color: white;
+}
+
+body {
+    background-color: white;
+    color: black;
+    
+    width: 100%;
+    max-width: var(--calc-width);
+    height: 100%;
+    max-height: var(--calc-height);
+
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
