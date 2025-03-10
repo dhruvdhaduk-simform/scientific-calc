@@ -65,3 +65,25 @@ main {
     overflow-x: auto;
     scrollbar-width: none;
 }
+
+.control {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.1rem;
+}
+
+.control-row-1,
+.control-row-3
+{
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+}
+
+.control-row-3 > .btn {
+    grid-column: span 2;
+}
+
+.btn {
+    height: 2.5rem;
+}
