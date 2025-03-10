@@ -7,6 +7,7 @@
 }
 
 :root {
+    --calc-bg-color: #f2f2f2;
     --calc-width: 22rem;
     --calc-height: 36rem;
     --main-padding: 0.35rem;
@@ -17,6 +18,10 @@
     --display-margin-bottom: 3rem;
 
     --display-control-gap: 2rem;
+
+    --btn-bg-color: #f8f8f8;
+    --numpad-btn-bg-color: #fcfcfc;
+    --equals-btn-bg-color: #91c1e7;
 }
 
 html {
@@ -24,7 +29,7 @@ html {
 }
 
 body {
-    background-color: white;
+    background-color: var(--calc-bg-color);
     color: black;
 
     width: 100%;
@@ -85,5 +90,21 @@ main {
 }
 
 .btn {
+    background-color: var(--btn-bg-color);
+    border: none;
     height: 2.5rem;
+}
+.control-row-1 > .btn,
+.control-row-3 > .btn,
+.btn.memory
+{
+    background-color: var(--calc-bg-color);
+}
+
+.btn.numpad {
+    background-color: var(--numpad-btn-bg-color);
+}
+
+.btn.equals {
+    background-color: var(--equals-btn-bg-color);
 }
