@@ -15,6 +15,8 @@
     --display-padding: 0.5rem;
     --display-font-size: 3rem;
     --display-margin-bottom: 3rem;
+
+    --display-control-gap: 2rem;
 }
 
 html {
@@ -40,6 +42,11 @@ body {
 
 main {
     padding: var(--main-padding);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: var(--display-control-gap);
 }
 
 .display {
