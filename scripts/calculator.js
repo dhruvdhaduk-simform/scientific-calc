@@ -17,6 +17,7 @@ export class Calculator {
     // Add event handlers.
     init() {
         this.btns.addEventListener("click", e => this.handleClickEvent(e), { signal: this.abortController.signal });
+        document.addEventListener("keydown", e => this.handleKeyEvents(e), { signal: this.abortController.signal });
         this.evaluator.addEventListener("message", e => this.handleResult(e), { signal: this.abortController.signal });
     }
 
@@ -48,6 +49,39 @@ export class Calculator {
                 this.display.append(btn.value);
                 return;
             case "=":
+                this.evaluator.postMessage(this.display.get());
+                return;
+        }
+    }
+
+    // Handle Key Events.
+    handleKeyEvents(e) {
+        const key = e.key;
+
+        if (!isNaN(key)) {
+            this.display.append(key);
+            return;
+        }
+
+        switch (key) {
+            case "c":
+            case "C":
+                this.display.clear();
+                return;
+            case "Backspace":
+                this.display.backspace();
+                return;
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+            case ".":
+            case "(":
+            case ")":
+                this.display.append(key);
+                return;
+            case "=":
+            case "Enter":
                 this.evaluator.postMessage(this.display.get());
                 return;
         }

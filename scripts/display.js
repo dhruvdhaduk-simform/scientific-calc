@@ -22,7 +22,7 @@ export class Display {
         }
         
         this.displayText.textContent += txt;
-        this.displayText.scrollTo(this.displayText.offsetWidth, 0);
+        this.displayText.scrollTo(this.displayText.offsetWidth, 100);
     }
 
     backspace() {
