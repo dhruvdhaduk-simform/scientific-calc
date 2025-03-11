@@ -8,25 +8,141 @@
         <title>Scientific Calculator</title>
 
         <link rel="shortcut icon" href="/assets/icons/calc.svg" type="image/x-icon">
-        
+
         <meta name="description" content="This is the Scientific Calculator site, in which you can perform various Scientific Calculations.">
-        
+
         <!-- Open Graph meta tags -->
         <meta property="og:title" content="Scientific Calculator">
         <meta property="og:description" content="This is the Scientific Calculator site, in which you can perform various Scientific Calculations.">
         <meta property="og:image" content="/assets/images/cover_image.png">
         <meta property="og:image:alt" content="Scientific Calculator Cover Image">
-        
+
         <!-- Twitter Card meta tags -->
         <meta name="twitter:title" content="Scientific Calculator">
         <meta name="twitter:description" content="This is the Scientific Calculator site, in which you can perform various Scientific Calculations.">
         <meta name="twitter:url" content="/">
         <meta name="twitter:image:src" content="/assets/images/cover_image.png ">
         <meta name="twitter:image:alt" content="Scientific Calculator Cover Image">
-        
+
         <link rel="stylesheet" href="/styles/index.css">
     </head>
 
     <body>
+        <main>
+            <div class="display">
+                <span class="display-text" tabindex="0">0</span>
+            </div>
+
+            <div class="control">
+                <div class="control-row-1">
+                    <button class="btn" aria-label="Degree Mode">DEG</button>
+                    <button class="btn" aria-label="Scientific Notation Mode">F-E</button>
+                </div>
+                
+                <!-- Memory Functions -->
+                <button class="btn memory" aria-label="Memory Clear">MC</button>
+                <button class="btn memory" aria-label="Memory Recall">MR</button>
+                <button class="btn memory" aria-label="Memory Add">M+</button>
+                <button class="btn memory" aria-label="Memory Subtract">M-</button>
+                <button class="btn memory" aria-label="Memory Store">MS</button>
+
+                <div class="control-row-3">
+                    
+                    <!-- Trigonometry Functions -->
+                    <button class="btn" aria-label="Trigonometry Functions">
+                        <img src="/assets/icons/trigonometry.svg" alt="Trigonometry">
+                        <span>Trigonometry</span>
+                        <img src="/assets/icons/down_arrow.svg" alt="Down Arrow">
+                    </button>
+
+                    <!-- Functions Menu -->
+                    <button class="btn" aria-label="Function Menu">
+                        <img src="/assets/icons/function.svg" alt="Function">
+                        <span>Function</span>
+                        <img src="/assets/icons/down_arrow.svg" alt="Down Arrow">
+                    </button>
+                </div>
+
+                <!-- 2nd Function Mode -->
+                <button class="btn" aria-label="Second Function Mode">
+                    2<sup>nd</sup>
+                </button>
+
+                <!-- Constants -->
+                <button class="btn pi" aria-label="Pi">π</button>
+                <button class="btn e" aria-label="Eular's Number">e</button>
+
+                <!-- Control the display -->
+                <button class="btn" aria-label="Clear">C</button>
+                <button class="btn" aria-label="Backspace">
+                    <img src="/assets/icons/backspace.svg" alt="Backspace">
+                </button>
+
+                <button class="btn" aria-label="Square">
+                    x<sup>2</sup>
+                </button>
+                <button class="btn" aria-label="Reciprocal">
+                    1/x
+                </button>
+
+                <button class="btn" aria-label="Absolute Value">| x |</button>
+                <button class="btn" aria-label="Exponential">exp</button>
+                <button class="btn" aria-label="Modulus">mod</button>
+
+                <button class="btn" aria-label="Square Root">
+                    √x
+                </button>
+
+                <button class="btn" aria-label="Parenthesis Open">(</button>
+                <button class="btn" aria-label="Parenthesis Close">)</button>
+
+                <button class="btn factorial" aria-label="Factorial">n!</button>
+
+                <button class="btn operator divide" aria-label="Division">
+                    <img src="/assets/icons/divide.svg" alt="Division">
+                </button>
+
+                <button class="btn" aria-label="Power">
+                    x<sup>y</sup>
+                </button>
+                <button class="btn numpad digit" aria-label="Digit 7">7</button>
+                <button class="btn numpad digit" aria-label="Digit 8">8</button>
+                <button class="btn numpad digit" aria-label="Digit 9">9</button>
+
+                <button class="btn operator" aria-label="Multiplication">
+                    <img src="/assets/icons/multiply.svg" alt="Multiplication">
+                </button>
+
+                <button class="btn" aria-label="10 to the Power">
+                    10<sup>x</sup>
+                </button>
+
+                <button class="btn numpad digit" aria-label="Digit 4">4</button>
+                <button class="btn numpad digit" aria-label="Digit 5">5</button>
+                <button class="btn numpad digit" aria-label="Digit 6">6</button>
+
+                <button class="btn operator" aria-label="Subtraction">
+                    <img src="/assets/icons/minus.svg" alt="Subtraction">
+                </button>
+
+                <button class="btn" aria-label="Logarithm">log</button>
+
+                <button class="btn numpad digit" aria-label="Digit 1">1</button>
+                <button class="btn numpad digit" aria-label="Digit 2">2</button>
+                <button class="btn numpad digit" aria-label="Digit 3">3</button>
+
+                <button class="btn operator" aria-label="Addition">
+                    <img src="/assets/icons/plus.svg" alt="Addition">
+                </button>
+
+                <button class="btn" aria-label="Natural Logarithm">ln</button>
+                <button class="btn numpad plus-or-minus" aria-label="Positive Negative Toggle">±</button>
+
+                <button class="btn numpad digit" aria-label="Digit 0">0</button>
+                <button class="btn numpad dot" aria-label="Decimal Point">.</button>
+
+                <button class="btn equals operator" aria-label="Equals">=</button>
+            </div>
+        </main>
     </body>
 </html>
