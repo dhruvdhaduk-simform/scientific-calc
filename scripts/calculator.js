@@ -34,7 +34,7 @@ export class Calculator {
 
         switch (btn.value) {
             case "clear":
-                this.display.clear();
+                this.display.set("0");
                 return;
             case "backspace":
                 this.display.backspace();
@@ -66,7 +66,7 @@ export class Calculator {
         switch (key) {
             case "c":
             case "C":
-                this.display.clear();
+                this.display.set("0");
                 return;
             case "Backspace":
                 this.display.backspace();
