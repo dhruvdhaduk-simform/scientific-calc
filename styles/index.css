@@ -66,6 +66,7 @@ main {
     gap: var(--display-control-gap);
 }
 
+/* Display area of Calculator */
 .display {
     height: var(--display-height);
     padding: var(--display-padding);
@@ -83,6 +84,7 @@ main {
     scrollbar-width: none;
 }
 
+/* Control buttons area layout*/
 .control {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -101,6 +103,7 @@ main {
     grid-column: span 2;
 }
 
+/* Styling for buttons */
 .btn {
     background-color: var(--btn-bg-color);
     border: none;
