@@ -1,5 +1,6 @@
 "use strict";
 
+// Initialize some global variable to use directly inside eval()
 const abs = Math.abs;
 const floor = Math.floor;
 const ceil = Math.ceil;
@@ -10,6 +11,7 @@ const tan = Math.tan;
 
 const log = Math.log;
 
+// Handle message events from main script.
 globalThis.addEventListener("message", function(event) {
     try {
         let result = eval(event.data);
