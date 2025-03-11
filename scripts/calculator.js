@@ -3,7 +3,7 @@
 import { Display } from "./display.js";
 
 export class Calculator {
-    
+
     constructor(displayID, btnsID) {
         this.display = new Display(displayID);
         this.btns = document.querySelector(`#${btnsID}`);
@@ -43,6 +43,8 @@ export class Calculator {
             case "*":
             case "/":
             case ".":
+            case "(":
+            case ")":
                 this.display.append(btn.value);
                 return;
             case "=":
