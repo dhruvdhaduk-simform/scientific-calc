@@ -27,12 +27,28 @@ export class Calculator {
 
         if (!btn?.value) return;
 
-        if (!isNaN(btn.value)) {
-            this.display.append(btn.value);
+        this.handleInput(btn.value);
+    }
+
+    // Handle Key Events.
+    handleKeyEvents(e) {
+        this.handleInput(e.key);
+    }
+
+    // Actual Logic to handle input from both Keyboard and Button click
+    handleInput(input) {
+        if (typeof input !== "string")
+            throw new TypeError("Input must be string");
+        
+        if (!isNaN(input)) {
+            this.display.append(input);
             return;
         }
+        
+        input = input.toLowerCase();
 
-        switch (btn.value) {
+        switch (input) {
+            case "c":
             case "clear":
                 this.display.clear();
                 return;
@@ -46,42 +62,10 @@ export class Calculator {
             case ".":
             case "(":
             case ")":
-                this.display.append(btn.value);
+                this.display.append(input);
                 return;
             case "=":
-                this.evaluator.postMessage(this.display.get());
-                return;
-        }
-    }
-
-    // Handle Key Events.
-    handleKeyEvents(e) {
-        const key = e.key;
-
-        if (!isNaN(key)) {
-            this.display.append(key);
-            return;
-        }
-
-        switch (key) {
-            case "c":
-            case "C":
-                this.display.clear();
-                return;
-            case "Backspace":
-                this.display.backspace();
-                return;
-            case "+":
-            case "-":
-            case "*":
-            case "/":
-            case ".":
-            case "(":
-            case ")":
-                this.display.append(key);
-                return;
-            case "=":
-            case "Enter":
+            case "enter":
                 this.evaluator.postMessage(this.display.get());
                 return;
         }
