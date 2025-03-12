@@ -15,6 +15,12 @@ const log = Math.log;
 globalThis.addEventListener("message", function(event) {
     try {
         let result = eval(event.data);
+
+        // Handle divide by 0
+        if (Math.abs(result) === Infinity) {
+            throw new Error("This operation is not allowed");
+        }
+        
         globalThis.postMessage({
             success: true,
             q: event.data,
