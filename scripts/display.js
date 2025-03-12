@@ -10,7 +10,7 @@ export class Display {
     }
 
     clear() {
-        this.displayText.textContent = "";
+        this.displayText.textContent = "0";
     }
 
     append(txt) {
@@ -18,16 +18,21 @@ export class Display {
             throw new TypeError("Display only contains string or number");
 
         if (this.displayText.textContent.trim() === "0") {
-            this.clear();
+            this.set(txt)
+        }
+        else {
+            this.displayText.textContent += txt;
         }
         
-        this.displayText.textContent += txt;
         this.displayText.scrollTo(this.displayText.offsetWidth, 100);
     }
 
     backspace() {
         const txt = this.displayText.textContent;
         this.displayText.textContent = txt.substring(0, txt.length - 1);
+        if (this.displayText.textContent.trim() === '') {
+            this.clear();
+        }
     }
 
     get() {
@@ -35,7 +40,6 @@ export class Display {
     }
 
     set(txt) {
-        this.clear();
-        this.append(txt);
+        this.displayText.textContent = txt;
     }
 }
