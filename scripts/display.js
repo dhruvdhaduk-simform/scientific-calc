@@ -1,7 +1,7 @@
 "use strict";
 
 export class Display {
-    
+
     constructor(id) {
         this.displayText = document.querySelector(`#${id}`);
         if (!this.displayText) {
@@ -23,7 +23,7 @@ export class Display {
         else {
             this.displayText.textContent += txt;
         }
-        
+
         this.displayText.scrollTo(this.displayText.offsetWidth, 100);
     }
 

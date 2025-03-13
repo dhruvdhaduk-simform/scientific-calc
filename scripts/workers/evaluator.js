@@ -20,7 +20,7 @@ globalThis.addEventListener("message", function(event) {
         if (Math.abs(result) === Infinity) {
             throw new Error("This operation is not allowed");
         }
-        
+
         globalThis.postMessage({
             success: true,
             q: event.data,

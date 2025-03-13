@@ -39,12 +39,12 @@ export class Calculator {
     handleInput(input) {
         if (typeof input !== "string")
             throw new TypeError("Input must be string");
-        
+
         if (!isNaN(input)) {
             this.display.append(input);
             return;
         }
-        
+
         input = input.toLowerCase();
 
         switch (input) {
