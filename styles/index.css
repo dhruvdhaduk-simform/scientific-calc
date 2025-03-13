@@ -10,6 +10,7 @@
     --calc-bg-color: #f2f2f2;
     --calc-width: 22rem;
     --calc-height: 36rem;
+    --calc-border-radius: 0.75rem;
     --main-padding: 0.35rem;
 
     --display-height: 5rem;
@@ -19,6 +20,7 @@
 
     --display-control-gap: 2rem;
 
+    --btn-border-radius: 0.35rem;
     --btn-bg-color: #f8f8f8;
     --numpad-btn-bg-color: #fcfcfc;
     --equals-btn-bg-color: #91c1e7;
@@ -43,6 +45,7 @@ html {
 body {
     background-color: var(--calc-bg-color);
     color: black;
+    border-radius: var(--calc-border-radius);
 
     width: 100%;
     max-width: var(--calc-width);
@@ -55,6 +58,7 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
+
 }
 
 main {
@@ -107,8 +111,10 @@ main {
 .btn {
     background-color: var(--btn-bg-color);
     border: none;
+    border-radius: var(--btn-border-radius);
     height: var(--btn-height);
     cursor: pointer;
+
 }
 .btn:hover {
     scale: 0.95;
