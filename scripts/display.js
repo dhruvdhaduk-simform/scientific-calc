@@ -1,5 +1,7 @@
 "use strict";
 
+const CHARACTER_LIMIT = 25;
+
 export class Display {
 
     constructor(id) {
@@ -14,6 +16,11 @@ export class Display {
     }
 
     append(txt) {
+        if (this.displayText.textContent.length >= CHARACTER_LIMIT) {
+            alert(`You can only enter 25 characters.`);
+            return;
+        }
+
         if (typeof txt !== "string" && typeof txt !== "number")
             throw new TypeError("Display only contains string or number");
 
