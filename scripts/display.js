@@ -67,6 +67,25 @@ export class Display {
             }
         }
 
+        // Prevent multiple dots inside a number.
+        let isInsideNumber = false;
+        let isDotOccured = false;
+        for (let i = newInput.length - 1; i >= 0; i--) {
+            if (!isNaN(newInput[i])) {
+                isInsideNumber = true;
+            }
+            else if (newInput[i] === '.') {
+                if (isInsideNumber && isDotOccured) {
+                    return;
+                }
+                isInsideNumber = true;
+                isDotOccured = true;
+            }
+            else {
+                isInsideNumber = false;
+                isDotOccured = false;
+            }
+        }
 
         if (typeof txt !== "string" && typeof txt !== "number")
             throw new TypeError("Display only contains string or number");
