@@ -35,18 +35,9 @@ export class Display {
             }
         }
 
-        // Prevent user from entering multiple dots.
-        if (txt.endsWith(".")) {
-            let multipleDots = false;
-            if (txt[length - 2] === '.') {
-                multipleDots = true;
-            }
-
-            if (multipleDots) {
-                return;
-            }
-
-            if (txt.length === 1 && this.get().endsWith(".")) {
+        // Prevent user from entering multiple decimal points.
+        if (txt.startsWith(".")) {
+            if(this.get().match(/\.\d*$/)) {
                 return;
             }
         }
@@ -64,26 +55,6 @@ export class Display {
             }
             else {
                 isOperator = false;
-            }
-        }
-
-        // Prevent multiple dots inside a number.
-        let isInsideNumber = false;
-        let isDotOccured = false;
-        for (let i = newInput.length - 1; i >= 0; i--) {
-            if (!isNaN(newInput[i])) {
-                isInsideNumber = true;
-            }
-            else if (newInput[i] === '.') {
-                if (isInsideNumber && isDotOccured) {
-                    return;
-                }
-                isInsideNumber = true;
-                isDotOccured = true;
-            }
-            else {
-                isInsideNumber = false;
-                isDotOccured = false;
             }
         }
 
