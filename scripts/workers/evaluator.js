@@ -22,23 +22,50 @@ function factorial(n) {
 // Handle message events from main script.
 globalThis.addEventListener("message", function(event) {
     try {
-        let result = eval(event.data);
+        let q = event.data.q
+            .replace(/(\d+|\be|π)\^(\d+)/g, "$1**$2")
+            .replace(/√(\d+)/g, "sqrt($1)")
+            .replace(/(\d+)!/g, 'factorial($1)');
+
+        let sin = Math.sin;
+        let cos = Math.cos;
+        let tan = Math.tan;
+
+        let asin = Math.asin;
+        let acos = Math.acos;
+        let atan = Math.atan;
+
+        if (event.data.degreeMode) {
+            sin = (x) => Math.sin(x * (Math.PI / 180));
+            cos = (x) => Math.cos(x * (Math.PI / 180));
+            tan = (x) => Math.tan(x * (Math.PI / 180));
+
+            asin = (x) => (180 / Math.PI) * Math.asin(x);
+            acos = (x) => (180 / Math.PI) * Math.acos(x);
+            atan = (x) => (180 / Math.PI) * Math.atan(x);
+        }
+
+        let result = eval(q);
 
         // Handle divide by 0
         if (!isFinite(result)) {
             throw new Error("This operation is not allowed");
         }
 
+        if (event.data.exponentialResult) {
+            result = result.toExponential();
+        }
+
         globalThis.postMessage({
             success: true,
-            q: event.data,
+            q: event.data.q,
             result
         });
     } catch (error) {
         globalThis.postMessage({
             success: false,
-            q: event.data,
-            error: error.toString()
+            q: event.data.q,
+            error
         })
     }
 });

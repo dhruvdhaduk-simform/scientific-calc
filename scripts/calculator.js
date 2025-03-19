@@ -9,6 +9,14 @@ export class Calculator {
         this.btns = document.querySelector(`#${btnsID}`);
         this.abortController = new AbortController();
 
+        this.degRadBtn = document.querySelector("#deg-rad");
+        this.fnModeBtn = document.querySelector("#fn-mode");
+        this.resultModeBtn = document.querySelector("#result-mode");
+
+        this.sinBtn = document.querySelector("#sin-btn");
+        this.cosBtn = document.querySelector("#cos-btn");
+        this.tanBtn = document.querySelector("#tan-btn");
+
         this.evaluator = new Worker("/scripts/workers/evaluator.js");
 
         this.init();
@@ -66,19 +74,144 @@ export class Calculator {
                 return;
             case "=":
             case "enter":
-                this.evaluator.postMessage(this.display.get());
+                this.sendQuery(this.display.get());
+                return;
+            case "e":
+                this.display.append(input);
+                return;
+            case "pi":
+                this.display.append("π");
+                return;
+            case "square":
+                this.display.append("^2");
+                return;
+            case "sqrt":
+                this.display.append("√");
+                return;
+            case "power10":
+                this.display.append("10^");
+                return;
+            case "power":
+                this.display.append("^");
+                return;
+            case "reciprocal":
+                this.display.append("1/");
+                return;
+            case "factorial":
+                this.display.append("!");
+                return;
+            case "log":
+                this.display.append("log(");
+                return;
+            case "ln":
+                this.display.append("ln(");
+                return;
+            case "mod":
+                this.display.append("%");
+                return;
+            case "exp":
+                this.display.append("e^");
+                return;
+            case "abs":
+                this.display.append("abs(");
+                return;
+            case "plusminus":
+                this.sendQuery(`(-1) * (${this.display.get()})`);
+                return;
+            case "sin":
+            case "cos":
+            case "tan":
+            case "asin":
+            case "acos":
+            case "atan":
+            case "floor":
+            case "ceil":
+            case "round":
+            case "cbrt":
+                this.display.append(`${input}(`);
+                return;
+            case "deg":
+            case "rad":
+                this.toggleDegRad();
+                return;
+            case "fn1":
+            case "fn2":
+                this.toggleFnMode();
+                return;
+            case "f-e":
+            case "ex":
+                this.toggleResultMode();
                 return;
         }
     }
+
+
+    sendQuery(q) {
+        this.evaluator.postMessage({
+            q,
+            degreeMode: this.degRadBtn.value === "deg",
+            exponentialResult: this.resultModeBtn.value === "ex",
+        });
+    }
+
 
     // Handle message events from evaluator worker.
     handleResult(e) {
         if (e.data.success) {
             this.display.set(e.data.result);
+            this.history.add(e.data.q);
+            this.history.last();
         }
         else {
-            alert(e.data.error);
+            alert(`Error: ${e.data.error.message}`);
             console.error(e.data.error);
+        }
+    }
+
+    toggleDegRad() {
+        if (this.degRadBtn.value === "deg") {
+            this.degRadBtn.value = "rad";
+            this.degRadBtn.textContent = "RAD";
+            this.degRadBtn.ariaLabel = "Radian Mode";
+        }
+        else {
+            this.degRadBtn.value = "deg";
+            this.degRadBtn.textContent = "DEG";
+            this.degRadBtn.ariaLabel = "Degree Mode";
+        }
+    }
+
+    toggleFnMode() {
+        if (this.fnModeBtn.value === "fn2") {
+            this.fnModeBtn.value = "fn1";
+            this.fnModeBtn.textContent = "Primary";
+            this.fnModeBtn.ariaLabel = "Primary Function Mode";
+
+            this.sinBtn.value = this.sinBtn.ariaLabel = this.sinBtn.textContent = "asin";
+            this.cosBtn.value = this.cosBtn.ariaLabel = this.cosBtn.textContent = "acos";
+            this.tanBtn.value = this.tanBtn.ariaLabel = this.tanBtn.textContent = "atan";
+        }
+        else {
+            this.fnModeBtn.value = "fn2";
+            this.fnModeBtn.innerHTML = "2<sup>nd</sup>";
+            this.fnModeBtn.ariaLabel = "Second Function Mode";
+
+            this.sinBtn.value = this.sinBtn.ariaLabel = this.sinBtn.textContent = "sin";
+            this.cosBtn.value = this.cosBtn.ariaLabel = this.cosBtn.textContent = "cos";
+            this.tanBtn.value = this.tanBtn.ariaLabel = this.tanBtn.textContent = "tan";
+        }
+    }
+
+    toggleResultMode() {
+        if (this.resultModeBtn.value === "f-e") {
+            this.resultModeBtn.value = "ex";
+            this.resultModeBtn.textContent = "E";
+            this.resultModeBtn.ariaLabel = "Scientific Notation Mode";
+        }
+        else {
+            this.resultModeBtn.value = "f-e";
+            this.resultModeBtn.textContent = "F-E";
+            this.resultModeBtn.ariaLabel = "Default Notation Mode";
         }
     }
 
