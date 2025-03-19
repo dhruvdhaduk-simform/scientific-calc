@@ -34,6 +34,21 @@ export class Display {
             }
         }
 
+        if (txt.endsWith(".")) {
+            let multipleDots = false;
+            if (txt[length - 2] === '.') {
+                multipleDots = true;
+            }
+
+            if (multipleDots) {
+                return;
+            }
+
+            if (txt.length === 1 && this.get().endsWith(".")) {
+                return;
+            }
+        }
+
         if (typeof txt !== "string" && typeof txt !== "number")
             throw new TypeError("Display only contains string or number");
 
