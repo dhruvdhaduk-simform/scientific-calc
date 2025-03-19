@@ -4,12 +4,20 @@
 const abs = Math.abs;
 const floor = Math.floor;
 const ceil = Math.ceil;
+const round = Math.round;
+const cbrt = Math.cbrt;
 
-const sin = Math.sin;
-const cos = Math.cos;
-const tan = Math.tan;
+const log = Math.log10;
+const ln = Math.log;
 
-const log = Math.log;
+const π = Math.PI;
+const e = Math.E;
+
+const sqrt = Math.sqrt;
+
+function factorial(n) {
+    return n <= 1 ? 1 : n * factorial(n - 1);
+}
 
 // Handle message events from main script.
 globalThis.addEventListener("message", function(event) {
