@@ -43,11 +43,11 @@ export class Display {
         }
 
         // Prevent user from entering multiple operators.
-        const operators = ['+', '-', '*', '/'];
+        const operators = new Set(['+', '-', '*', '/']);
         const newInput = this.get() + txt;
         let isOperator = false;
         for (let i = newInput.length - 1; i >= 0; i--) {
-            if (operators.includes(newInput[i])) {
+            if (operators.has(newInput[i])) {
                 if (isOperator) {
                     return;
                 }
