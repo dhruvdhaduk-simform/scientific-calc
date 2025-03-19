@@ -103,7 +103,7 @@ main {
     grid-template-columns: subgrid;
 }
 
-.control-row-3 > .btn {
+.control-row-3 > * {
     grid-column: span 2;
 }
 
@@ -124,14 +124,14 @@ main {
 }
 
 .control-row-1 > .btn,
-.control-row-3 > .btn,
+.control-row-3 .btn,
 .btn.memory
 {
     background-color: var(--calc-bg-color);
     font-weight: 500;
 }
 
-.control-row-3 > .btn {
+.control-row-3 .btn {
     font-size: var(--row3-btns-font-size);
     display: flex;
     gap: var(--row3-inside-btn-gaps);
@@ -180,4 +180,38 @@ main {
 
 .btn.equals {
     background-color: var(--equals-btn-bg-color);
+}
+
+.trigo-container,
+.fn-menu-container
+{
+    position: relative;
+}
+
+.trigo-content,
+.fn-menu-content
+{
+    background-color: white;
+    box-shadow: 0 0 10px 1px black;
+    position: absolute;
+    top: calc(var(--btn-height) + 0.25rem);
+    top: var(--btn-height);
+    left: 0;
+
+    width: 100%;
+
+    grid-template-columns: 1fr 1fr;
+    gap: var(--btn-gaps);
+    padding: var(--btn-gaps);
+    border-radius: var(--btn-border-radius);
+
+    display: none;
+}
+
+.trigo-container > button:hover + .trigo-content,
+.trigo-content:hover,
+.fn-menu-container > button:hover + .fn-menu-content,
+.fn-menu-content:hover
+{
+    display: grid;
 }

@@ -37,8 +37,8 @@
 
             <div id="control" class="control">
                 <div class="control-row-1">
-                    <button class="btn" aria-label="Degree Mode" value="deg">DEG</button>
-                    <button class="btn" aria-label="Scientific Notation Mode" value="f-e">F-E</button>
+                    <button id="deg-rad" class="btn" aria-label="Degree Mode" value="deg">DEG</button>
+                    <button id="result-mode" class="btn" aria-label="Default Notation Mode" value="f-e">F-E</button>
                 </div>
 
                 <!-- Memory Functions -->
@@ -51,22 +51,41 @@
                 <div class="control-row-3">
 
                     <!-- Trigonometry Functions -->
-                    <button class="btn" aria-label="Trigonometry Functions" value="trigonometry">
-                        <img src="/assets/icons/trigonometry.svg" alt="Trigonometry">
-                        <span>Trigonometry</span>
-                        <img src="/assets/icons/down_arrow.svg" alt="Down Arrow">
-                    </button>
+                    <div class="trigo-container">
+                        <button class="btn" aria-label="Trigonometry Functions" value="trigonometry">
+                            <img src="/assets/icons/trigonometry.svg" alt="Trigonometry">
+                            <span>Trigonometry</span>
+                            <img src="/assets/icons/down_arrow.svg" alt="Down Arrow">
+                        </button>
+
+                        <div class="trigo-content">
+                            <button id="sin-btn" class="btn" aria-label="sin" value="sin">sin</button>
+                            <button id="cos-btn" class="btn" aria-label="cos" value="cos">cos</button>
+                            <button id="tan-btn" class="btn" aria-label="tan" value="tan">tan</button>
+                        </div>
+                    </div>
+
 
                     <!-- Functions Menu -->
-                    <button class="btn" aria-label="Function Menu" value="functions">
-                        <img src="/assets/icons/function.svg" alt="Function">
-                        <span>Function</span>
-                        <img src="/assets/icons/down_arrow.svg" alt="Down Arrow">
-                    </button>
+                    <div class="fn-menu-container">
+                        <button class="btn" aria-label="Function Menu" value="functions">
+                            <img src="/assets/icons/function.svg" alt="Function">
+                            <span>Function</span>
+                            <img src="/assets/icons/down_arrow.svg" alt="Down Arrow">
+                        </button>
+
+                        <div class="fn-menu-content">
+                            <button class="btn" aria-label="floor" value="floor">floor</button>
+                            <button class="btn" aria-label="ceil" value="ceil">ceil</button>
+                            <button class="btn" aria-label="round" value="round">round</button>
+                            <button class="btn" aria-label="cbrt" value="cbrt">cbrt</button>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- 2nd Function Mode -->
-                <button class="btn" aria-label="Second Function Mode" value="fn2">
+                <button id="fn-mode" class="btn" aria-label="Second Function Mode" value="fn2">
                     2<sup>nd</sup>
                 </button>
 
