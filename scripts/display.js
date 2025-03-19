@@ -51,6 +51,23 @@ export class Display {
             }
         }
 
+        // Prevent user from entering multiple operators.
+        const operators = ['+', '-', '*', '/'];
+        const newInput = this.get() + txt;
+        let isOperator = false;
+        for (let i = newInput.length - 1; i >= 0; i--) {
+            if (operators.includes(newInput[i])) {
+                if (isOperator) {
+                    return;
+                }
+                isOperator = true;
+            }
+            else {
+                isOperator = false;
+            }
+        }
+
+
         if (typeof txt !== "string" && typeof txt !== "number")
             throw new TypeError("Display only contains string or number");
 
