@@ -1,10 +1,11 @@
 "use strict";
 
 import { Display } from "./display.js";
+import { Memory } from "./memory.js";
 
 export class Calculator {
 
-    constructor(displayID, btnsID) {
+    constructor(displayID, btnsID, memoryKey) {
         this.display = new Display(displayID);
         this.btns = document.querySelector(`#${btnsID}`);
         this.abortController = new AbortController();
@@ -18,6 +19,8 @@ export class Calculator {
         this.tanBtn = document.querySelector("#tan-btn");
 
         this.evaluator = new Worker("/scripts/workers/evaluator.js");
+
+        this.memory = new Memory(memoryKey);
 
         this.init();
     }
@@ -141,6 +144,21 @@ export class Calculator {
             case "f-e":
             case "ex":
                 this.toggleResultMode();
+                return;
+            case "mc":
+                this.memory.clear();
+                return;
+            case "mr":
+                this.memory.recall((x) => this.display.set(x));
+                return;
+            case "m+":
+                this.memory.plus(this.display.get());
+                return;
+            case "m-":
+                this.memory.minus(this.display.get());
+                return;
+            case "ms":
+                this.memory.store(this.display.get());
                 return;
         }
     }
