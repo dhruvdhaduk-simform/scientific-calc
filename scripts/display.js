@@ -17,6 +17,7 @@ export class Display {
 
     append(txt) {
 
+        // Ensure that the length of the number entered is within the limit.
         if (!isNaN(txt)) {
             let digitCount = txt.length;
             const displayedTxt = this.get();
@@ -34,6 +35,7 @@ export class Display {
             }
         }
 
+        // Prevent user from entering multiple dots.
         if (txt.endsWith(".")) {
             let multipleDots = false;
             if (txt[length - 2] === '.') {
