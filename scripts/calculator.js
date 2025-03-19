@@ -85,6 +85,6 @@ export class Calculator {
     // Remove all event handlers and terminate evaluator worker.
     destroy() {
         this.abortController?.abort();
-        this.evaluator.terminate();
+        this.evaluator?.terminate();
     }
 }
