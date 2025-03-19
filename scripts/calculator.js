@@ -77,7 +77,7 @@ export class Calculator {
             this.display.set(e.data.result);
         }
         else {
-            alert(`Error: ${e.data.error.message}`);
+            alert(e.data.error);
             console.error(e.data.error);
         }
     }

@@ -30,7 +30,7 @@ globalThis.addEventListener("message", function(event) {
         globalThis.postMessage({
             success: false,
             q: event.data,
-            error
+            error: error.toString()
         })
     }
 });
