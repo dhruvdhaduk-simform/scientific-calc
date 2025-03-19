@@ -1,6 +1,6 @@
 "use strict";
 
-const CHARACTER_LIMIT = 25;
+const NUMBERS_CHARACTER_LIMIT = 15;
 
 export class Display {
 
@@ -16,9 +16,22 @@ export class Display {
     }
 
     append(txt) {
-        if (this.displayText.textContent.length >= CHARACTER_LIMIT) {
-            alert(`You can only enter 25 characters.`);
-            return;
+
+        if (!isNaN(txt)) {
+            let digitCount = txt.length;
+            const displayedTxt = this.get();
+            for (let i = displayedTxt.length - 1; i >= 0; i--) {
+                if (!isNaN(displayedTxt[i]) || displayedTxt[i] === '.') {
+                    digitCount++;
+                    continue;
+                }
+                break;
+            }
+
+            if (digitCount > NUMBERS_CHARACTER_LIMIT) {
+                alert(`Only ${NUMBERS_CHARACTER_LIMIT} digits long numbers are allowed.`);
+                return;
+            }
         }
 
         if (typeof txt !== "string" && typeof txt !== "number")
