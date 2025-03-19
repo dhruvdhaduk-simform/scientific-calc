@@ -17,7 +17,7 @@ globalThis.addEventListener("message", function(event) {
         let result = eval(event.data);
 
         // Handle divide by 0
-        if (Math.abs(result) === Infinity) {
+        if (!isFinite(result)) {
             throw new Error("This operation is not allowed");
         }
 
