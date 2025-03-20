@@ -177,8 +177,6 @@ export class Calculator {
     handleResult(e) {
         if (e.data.success) {
             this.display.set(e.data.result);
-            this.history.add(e.data.q);
-            this.history.last();
         }
         else {
             alert(`Error: ${e.data.error.message}`);

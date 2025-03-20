@@ -23,7 +23,7 @@ function factorial(n) {
 globalThis.addEventListener("message", function(event) {
     try {
         let q = event.data.q
-            .replace(/(\d+|\be|π)\^(\d+)/g, "$1**$2")
+            .replace(/\^/, "**")
             .replace(/√(\d+)/g, "sqrt($1)")
             .replace(/(\d+)!/g, 'factorial($1)');
 
