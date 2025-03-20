@@ -209,8 +209,10 @@ main {
 }
 
 .trigo-container > button:hover + .trigo-content,
+.trigo-container > button:focus + .trigo-content,
 .trigo-content:hover,
 .fn-menu-container > button:hover + .fn-menu-content,
+.fn-menu-container > button:focus + .fn-menu-content,
 .fn-menu-content:hover
 {
     display: grid;
