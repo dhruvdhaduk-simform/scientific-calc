@@ -94,12 +94,14 @@ export class Calculator {
             case "power10":
                 this.display.append("10^");
                 return;
+            case "^":
             case "power":
                 this.display.append("^");
                 return;
             case "reciprocal":
                 this.display.append("1/");
                 return;
+            case "!":
             case "factorial":
                 this.display.append("!");
                 return;
