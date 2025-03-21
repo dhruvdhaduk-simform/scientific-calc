@@ -22,8 +22,7 @@ export class Memory {
         this.storeCurrentValue();
     }
 
-    recall(callback = () => { }) {
-        callback(this.#value);
+    recall() {
         return this.#value;
     }
 

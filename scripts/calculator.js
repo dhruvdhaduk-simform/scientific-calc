@@ -152,7 +152,7 @@ export class Calculator {
                 this.memory.clear();
                 return;
             case "mr":
-                this.memory.recall((x) => this.display.set(x));
+                this.display.set(this.memory.recall());
                 return;
             case "m+":
                 this.memory.plus(this.display.get());
