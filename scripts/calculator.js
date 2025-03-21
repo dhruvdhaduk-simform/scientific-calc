@@ -111,6 +111,7 @@ export class Calculator {
             case "ln":
                 this.display.append("ln(");
                 return;
+            case "%":
             case "mod":
                 this.display.append("%");
                 return;
