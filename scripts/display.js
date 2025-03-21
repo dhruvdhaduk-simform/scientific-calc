@@ -43,7 +43,7 @@ export class Display {
         }
 
         // Prevent user from entering multiple operators.
-        const operators = new Set(['+', '-', '*', '/']);
+        const operators = new Set(['+', '-', '*', '/', '%', '^']);
         const newInput = this.get() + txt;
         let isOperator = false;
         for (let i = newInput.length - 1; i >= 0; i--) {
