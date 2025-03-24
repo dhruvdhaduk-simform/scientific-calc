@@ -17,6 +17,17 @@ export class Memory {
         localStorage.setItem(this.key, this.#value);
     }
 
+    assertNumber(x) {
+        x = Number(x);
+        if (!isFinite(x)) {
+            const msg = "Only Numbers are allowed to add inside memory";
+            alert(msg);
+            throw new TypeError(msg);
+        }
+
+        return x;
+    }
+
     clear() {
         this.#value = 0;
         this.storeCurrentValue();
@@ -27,36 +38,21 @@ export class Memory {
     }
 
     plus(x) {
-        x = Number(x);
-        if (isNaN(x)) {
-            const msg = "Only Numbers are allowed to add inside memory";
-            alert(msg);
-            throw new TypeError(msg);
-        }
+        x = this.assertNumber(x);
 
         this.#value += x;
         this.storeCurrentValue();
     }
 
     minus(x) {
-        x = Number(x);
-        if (isNaN(x)) {
-            const msg = "Only Numbers are allowed to subtract from memory";
-            alert(msg);
-            throw new TypeError(msg);
-        }
+        x = this.assertNumber(x);
 
         this.#value -= x;
         this.storeCurrentValue();
     }
 
     store(x) {
-        x = Number(x);
-        if (isNaN(x)) {
-            const msg = "Only Numbers are allowed to store inside memory";
-            alert(msg);
-            throw new TypeError(msg);
-        }
+        x = this.assertNumber(x);
 
         this.#value = x;
         this.storeCurrentValue();
