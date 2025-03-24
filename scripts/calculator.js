@@ -5,18 +5,20 @@ import { Memory } from "./memory.js";
 
 export class Calculator {
 
-    constructor(displayID, btnsID, memoryKey) {
-        this.display = new Display(displayID);
-        this.btns = document.querySelector(`#${btnsID}`);
+    constructor(memoryKey, {
+        displayId, btnsId, degRanBtnId, fnModeBtnId, resultModeBtnId, sinBtnId, cosBtnId, tanBtnId
+    }) {
+        this.display = new Display(displayId);
+        this.btns = document.querySelector(`#${btnsId}`);
         this.abortController = new AbortController();
 
-        this.degRadBtn = document.querySelector("#deg-rad");
-        this.fnModeBtn = document.querySelector("#fn-mode");
-        this.resultModeBtn = document.querySelector("#result-mode");
+        this.degRadBtn = document.querySelector(`#${degRanBtnId}`);
+        this.fnModeBtn = document.querySelector(`#${fnModeBtnId}`);
+        this.resultModeBtn = document.querySelector(`#${resultModeBtnId}`);
 
-        this.sinBtn = document.querySelector("#sin-btn");
-        this.cosBtn = document.querySelector("#cos-btn");
-        this.tanBtn = document.querySelector("#tan-btn");
+        this.sinBtn = document.querySelector(`#${sinBtnId}`);
+        this.cosBtn = document.querySelector(`#${cosBtnId}`);
+        this.tanBtn = document.querySelector(`#${tanBtnId}`);
 
         this.evaluator = new Worker("/scripts/workers/evaluator.js");
 
