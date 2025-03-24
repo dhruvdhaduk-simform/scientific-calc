@@ -1,15 +1,28 @@
 "use strict";
 
 import { Display } from "./display.js";
+import { Memory } from "./memory.js";
 
 export class Calculator {
 
-    constructor(displayID, btnsID) {
-        this.display = new Display(displayID);
-        this.btns = document.querySelector(`#${btnsID}`);
+    constructor(memoryKey, {
+        displayId, btnsId, degRanBtnId, fnModeBtnId, resultModeBtnId, sinBtnId, cosBtnId, tanBtnId
+    }) {
+        this.display = new Display(displayId);
+        this.btns = document.querySelector(`#${btnsId}`);
         this.abortController = new AbortController();
 
+        this.degRadBtn = document.querySelector(`#${degRanBtnId}`);
+        this.fnModeBtn = document.querySelector(`#${fnModeBtnId}`);
+        this.resultModeBtn = document.querySelector(`#${resultModeBtnId}`);
+
+        this.sinBtn = document.querySelector(`#${sinBtnId}`);
+        this.cosBtn = document.querySelector(`#${cosBtnId}`);
+        this.tanBtn = document.querySelector(`#${tanBtnId}`);
+
         this.evaluator = new Worker("/scripts/workers/evaluator.js");
+
+        this.memory = new Memory(memoryKey);
 
         this.init();
     }
@@ -27,7 +40,12 @@ export class Calculator {
 
         if (!btn?.value) return;
 
-        this.handleInput(btn.value);
+        if (btn?.dataset?.type === "memory") {
+            this.handleMemoryFunctions(btn.value);
+        }
+        else {
+            this.handleInput(btn.value);
+        }
     }
 
     // Handle Key Events.
@@ -66,10 +84,109 @@ export class Calculator {
                 return;
             case "=":
             case "enter":
-                this.evaluator.postMessage(this.display.get());
+                this.sendQuery(this.display.get());
+                return;
+            case "e":
+                this.display.append(input);
+                return;
+            case "pi":
+                this.display.append("π");
+                return;
+            case "square":
+                this.display.append("^2");
+                return;
+            case "sqrt":
+                this.display.append("√");
+                return;
+            case "power10":
+                this.display.append("10^");
+                return;
+            case "^":
+            case "power":
+                this.display.append("^");
+                return;
+            case "reciprocal":
+                this.display.append("1/");
+                return;
+            case "!":
+            case "factorial":
+                this.display.append("!");
+                return;
+            case "log":
+                this.display.append("log(");
+                return;
+            case "ln":
+                this.display.append("ln(");
+                return;
+            case "%":
+            case "mod":
+                this.display.append("%");
+                return;
+            case "exp":
+                this.display.append("e^");
+                return;
+            case "abs":
+                this.display.append("abs(");
+                return;
+            case "plusminus":
+                this.sendQuery(`(-1) * (${this.display.get()})`);
+                return;
+            case "sin":
+            case "cos":
+            case "tan":
+            case "asin":
+            case "acos":
+            case "atan":
+            case "floor":
+            case "ceil":
+            case "round":
+            case "cbrt":
+                this.display.append(`${input}(`);
+                return;
+            case "deg":
+            case "rad":
+                this.toggleDegRad();
+                return;
+            case "fn1":
+            case "fn2":
+                this.toggleFnMode();
+                return;
+            case "f-e":
+            case "ex":
+                this.toggleResultMode();
                 return;
         }
     }
+
+    handleMemoryFunctions(input) {
+        switch(input) {
+            case "mc":
+                this.memory.clearMemory();
+                return;
+            case "mr":
+                this.display.set(this.memory.recallMemory());
+                return;
+            case "m+":
+                this.memory.plusMemory(this.display.get());
+                return;
+            case "m-":
+                this.memory.minusMemory(this.display.get());
+                return;
+            case "ms":
+                this.memory.storeMemory(this.display.get());
+                return;
+        }
+    }
+
+
+    sendQuery(query) {
+        this.evaluator.postMessage({
+            query,
+            degreeMode: this.degRadBtn.value === "deg",
+            exponentialResult: this.resultModeBtn.value === "ex",
+        });
+    }
+
 
     // Handle message events from evaluator worker.
     handleResult(e) {
@@ -77,9 +194,34 @@ export class Calculator {
             this.display.set(e.data.result);
         }
         else {
-            alert(e.data.error);
+            alert(`Error: ${e.data.error.message}`);
             console.error(e.data.error);
         }
+    }
+
+    toggleDegRad() {
+        const isDeg = this.degRadBtn.value === "deg";
+        this.degRadBtn.value = isDeg ? "rad" : "deg";
+        this.degRadBtn.textContent = isDeg ? "RAD" : "DEG";
+        this.degRadBtn.ariaLabel = isDeg ? "Radian Mode" : "Degree Mode";
+    }
+
+    toggleFnMode() {
+        const is2ndMode = this.fnModeBtn.value === "fn2";
+        this.fnModeBtn.value = is2ndMode ? "fn1" : "fn2";
+        this.fnModeBtn.innerHTML = is2ndMode ? "Primary" : "2<sup>nd</sup>";
+        this.fnModeBtn.ariaLabel = is2ndMode ? "Primary Function Mode" : "Second Function Mode";
+
+        this.sinBtn.value = this.sinBtn.ariaLabel = this.sinBtn.textContent = is2ndMode ? "asin" : "sin";
+        this.cosBtn.value = this.cosBtn.ariaLabel = this.cosBtn.textContent = is2ndMode ? "acos" : "cos";
+        this.tanBtn.value = this.tanBtn.ariaLabel = this.tanBtn.textContent = is2ndMode ? "atan" : "tan";
+    }
+
+    toggleResultMode() {
+        const isDefaultMode = this.resultModeBtn.value === "f-e";
+        this.resultModeBtn.value = isDefaultMode ? "ex" : "f-e";
+        this.resultModeBtn.textContent = isDefaultMode ? "E" : "F-E";
+        this.resultModeBtn.ariaLabel = isDefaultMode ? "Scientific Notation Mode" : "Default Notation Mode";
     }
 
     // Remove all event handlers and terminate evaluator worker.
