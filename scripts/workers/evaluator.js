@@ -22,7 +22,7 @@ function factorial(n) {
 // Handle message events from main script.
 globalThis.addEventListener("message", function(event) {
     try {
-        let q = event.data.q
+        let query = event.data.query
             .replace(/\^/, "**")
             .replace(/√(\d+)/g, "sqrt($1)")
             .replace(/(\d+)!/g, 'factorial($1)');
@@ -45,7 +45,7 @@ globalThis.addEventListener("message", function(event) {
             atan = (x) => (180 / Math.PI) * Math.atan(x);
         }
 
-        let result = eval(q);
+        let result = eval(query);
 
         // Handle divide by 0
         if (!isFinite(result)) {
@@ -58,13 +58,13 @@ globalThis.addEventListener("message", function(event) {
 
         globalThis.postMessage({
             success: true,
-            q: event.data.q,
+            query: event.data.query,
             result
         });
     } catch (error) {
         globalThis.postMessage({
             success: false,
-            q: event.data.q,
+            query: event.data.query,
             error
         })
     }

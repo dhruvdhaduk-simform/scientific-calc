@@ -167,9 +167,9 @@ export class Calculator {
     }
 
 
-    sendQuery(q) {
+    sendQuery(query) {
         this.evaluator.postMessage({
-            q,
+            query,
             degreeMode: this.degRadBtn.value === "deg",
             exponentialResult: this.resultModeBtn.value === "ex",
         });
