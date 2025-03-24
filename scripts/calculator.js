@@ -38,7 +38,12 @@ export class Calculator {
 
         if (!btn?.value) return;
 
-        this.handleInput(btn.value);
+        if (btn?.dataset?.type === "memory") {
+            this.handleMemoryFunctions(btn.value);
+        }
+        else {
+            this.handleInput(btn.value);
+        }
     }
 
     // Handle Key Events.
@@ -148,6 +153,11 @@ export class Calculator {
             case "ex":
                 this.toggleResultMode();
                 return;
+        }
+    }
+
+    handleMemoryFunctions(input) {
+        switch(input) {
             case "mc":
                 this.memory.clearMemory();
                 return;
