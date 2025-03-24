@@ -200,50 +200,28 @@ export class Calculator {
     }
 
     toggleDegRad() {
-        if (this.degRadBtn.value === "deg") {
-            this.degRadBtn.value = "rad";
-            this.degRadBtn.textContent = "RAD";
-            this.degRadBtn.ariaLabel = "Radian Mode";
-        }
-        else {
-            this.degRadBtn.value = "deg";
-            this.degRadBtn.textContent = "DEG";
-            this.degRadBtn.ariaLabel = "Degree Mode";
-        }
+        const isDeg = this.degRadBtn.value === "deg";
+        this.degRadBtn.value = isDeg ? "rad" : "deg";
+        this.degRadBtn.textContent = isDeg ? "RAD" : "DEG";
+        this.degRadBtn.ariaLabel = isDeg ? "Radian Mode" : "Degree Mode";
     }
 
     toggleFnMode() {
-        if (this.fnModeBtn.value === "fn2") {
-            this.fnModeBtn.value = "fn1";
-            this.fnModeBtn.textContent = "Primary";
-            this.fnModeBtn.ariaLabel = "Primary Function Mode";
+        const is2ndMode = this.fnModeBtn.value === "fn2";
+        this.fnModeBtn.value = is2ndMode ? "fn1" : "fn2";
+        this.fnModeBtn.innerHTML = is2ndMode ? "Primary" : "2<sup>nd</sup>";
+        this.fnModeBtn.ariaLabel = is2ndMode ? "Primary Function Mode" : "Second Function Mode";
 
-            this.sinBtn.value = this.sinBtn.ariaLabel = this.sinBtn.textContent = "asin";
-            this.cosBtn.value = this.cosBtn.ariaLabel = this.cosBtn.textContent = "acos";
-            this.tanBtn.value = this.tanBtn.ariaLabel = this.tanBtn.textContent = "atan";
-        }
-        else {
-            this.fnModeBtn.value = "fn2";
-            this.fnModeBtn.innerHTML = "2<sup>nd</sup>";
-            this.fnModeBtn.ariaLabel = "Second Function Mode";
-
-            this.sinBtn.value = this.sinBtn.ariaLabel = this.sinBtn.textContent = "sin";
-            this.cosBtn.value = this.cosBtn.ariaLabel = this.cosBtn.textContent = "cos";
-            this.tanBtn.value = this.tanBtn.ariaLabel = this.tanBtn.textContent = "tan";
-        }
+        this.sinBtn.value = this.sinBtn.ariaLabel = this.sinBtn.textContent = is2ndMode ? "asin" : "sin";
+        this.cosBtn.value = this.cosBtn.ariaLabel = this.cosBtn.textContent = is2ndMode ? "acos" : "cos";
+        this.tanBtn.value = this.tanBtn.ariaLabel = this.tanBtn.textContent = is2ndMode ? "atan" : "tan";
     }
 
     toggleResultMode() {
-        if (this.resultModeBtn.value === "f-e") {
-            this.resultModeBtn.value = "ex";
-            this.resultModeBtn.textContent = "E";
-            this.resultModeBtn.ariaLabel = "Scientific Notation Mode";
-        }
-        else {
-            this.resultModeBtn.value = "f-e";
-            this.resultModeBtn.textContent = "F-E";
-            this.resultModeBtn.ariaLabel = "Default Notation Mode";
-        }
+        const isDefaultMode = this.resultModeBtn.value === "f-e";
+        this.resultModeBtn.value = isDefaultMode ? "ex" : "f-e";
+        this.resultModeBtn.textContent = isDefaultMode ? "E" : "F-E";
+        this.resultModeBtn.ariaLabel = isDefaultMode ? "Scientific Notation Mode" : "Default Notation Mode";
     }
 
     // Remove all event handlers and terminate evaluator worker.
