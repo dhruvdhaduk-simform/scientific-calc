@@ -28,30 +28,30 @@ export class Memory {
         return x;
     }
 
-    clear() {
+    clearMemory() {
         this.#value = 0;
         this.storeCurrentValue();
     }
 
-    recall() {
+    recallMemory() {
         return this.#value;
     }
 
-    plus(x) {
+    plusMemory(x) {
         x = this.assertNumber(x);
 
         this.#value += x;
         this.storeCurrentValue();
     }
 
-    minus(x) {
+    minusMemory(x) {
         x = this.assertNumber(x);
 
         this.#value -= x;
         this.storeCurrentValue();
     }
 
-    store(x) {
+    storeMemory(x) {
         x = this.assertNumber(x);
 
         this.#value = x;

@@ -149,19 +149,19 @@ export class Calculator {
                 this.toggleResultMode();
                 return;
             case "mc":
-                this.memory.clear();
+                this.memory.clearMemory();
                 return;
             case "mr":
-                this.display.set(this.memory.recall());
+                this.display.set(this.memory.recallMemory());
                 return;
             case "m+":
-                this.memory.plus(this.display.get());
+                this.memory.plusMemory(this.display.get());
                 return;
             case "m-":
-                this.memory.minus(this.display.get());
+                this.memory.minusMemory(this.display.get());
                 return;
             case "ms":
-                this.memory.store(this.display.get());
+                this.memory.storeMemory(this.display.get());
                 return;
         }
     }
