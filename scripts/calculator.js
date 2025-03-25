@@ -195,6 +195,8 @@ export class Calculator {
 
         h.forEach((item) => {
             const li = document.createElement("li");
+            if (!li || !item?.query || !item?.result) return; 
+
             li.textContent = `${item.query} =  ${item.result}`;
 
             this.historyList.prepend(li);

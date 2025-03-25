@@ -33,6 +33,8 @@ export class History {
     }
 
     push(query, result) {
+        if (!query || !isFinite(result)) return;
+
         this.history.push({ query, result });
         this.removeOldHistory();
         this.storeCurrentHistory();
