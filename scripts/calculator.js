@@ -217,7 +217,8 @@ export class Calculator {
     handleResult(e) {
         if (e.data.success) {
             this.display.set(e.data.result);
-            this.history.push(e.data.query, e.data.result);
+            if (e.data.query.toString() !== e.data.result.toString())
+                this.history.push(e.data.query, e.data.result);
         }
         else {
             alert(`Error: ${e.data.error.message}`);
