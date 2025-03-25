@@ -42,4 +42,10 @@ export class History {
     getAll() {
         return this.history;
     }
+
+    clear() {
+        this.history = [];
+        this.storeCurrentHistory();
+        this.onHistoryChange(this.history);
+    }
 }

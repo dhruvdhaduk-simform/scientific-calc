@@ -38,6 +38,7 @@ export class Calculator {
         this.btns.addEventListener("click", e => this.handleClickEvent(e), { signal: this.abortController.signal });
         document.addEventListener("keydown", e => this.handleKeyEvents(e), { signal: this.abortController.signal });
         this.evaluator.addEventListener("message", e => this.handleResult(e), { signal: this.abortController.signal });
+        this.clearHistoryBtn.addEventListener("click", () => this.history.clear(), { signal: this.abortController.signal });
     }
 
     // Handle click events from buttons using event delegation.
