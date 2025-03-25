@@ -243,7 +243,7 @@ main {
 
 .history-content {
     width: calc(100% - 1rem);
-    max-height: 50%;
+    height: 50%;
     position: absolute;
     top: var(--history-btn-size);
     left: 0;
@@ -270,6 +270,7 @@ main {
 .history-content .history-list {
     padding: 1rem;
     overflow-y: auto;
+    flex: 1;
 }
 
 .history-content .history-list::-webkit-scrollbar {
