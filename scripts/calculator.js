@@ -190,7 +190,8 @@ export class Calculator {
         this.historyList.innerHTML = "";
 
         if (!h.length) {
-            this.historyList.innerHTML = `<span>No history available</span>`
+            // this.historyList.innerHTML = `<span>No history available</span>`
+            this.historyList.innerHTML = `<li>[ No history available ]</li>`;
             return;
         }
 
