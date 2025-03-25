@@ -2,11 +2,12 @@
 
 import { Display } from "./display.js";
 import { Memory } from "./memory.js";
+import { History } from "./history.js";
 
 export class Calculator {
 
-    constructor(memoryKey, {
-        displayId, btnsId, degRanBtnId, fnModeBtnId, resultModeBtnId, sinBtnId, cosBtnId, tanBtnId
+    constructor(memoryKey, historyKey, {
+        displayId, btnsId, degRanBtnId, fnModeBtnId, resultModeBtnId, sinBtnId, cosBtnId, tanBtnId, historyListId, clearHistoryBtnId
     }) {
         this.display = new Display(displayId);
         this.btns = document.querySelector(`#${btnsId}`);
@@ -23,6 +24,11 @@ export class Calculator {
         this.evaluator = new Worker("/scripts/workers/evaluator.js");
 
         this.memory = new Memory(memoryKey);
+
+        this.historyList = document.querySelector(`#${historyListId}`);
+        this.clearHistoryBtn = document.querySelector(`#${clearHistoryBtnId}`);
+
+        this.history = new History(historyKey, this.handleHistoryUpdate.bind(this));
 
         this.init();
     }
@@ -178,6 +184,24 @@ export class Calculator {
         }
     }
 
+    handleHistoryUpdate(h) {
+        console.log(this);
+        this.historyList.innerHTML = "";
+
+        if (!h.length) {
+            this.historyList.innerHTML = `<span>No history available</span>`
+            return;
+        }
+
+        h.forEach((item) => {
+            const li = document.createElement("li");
+            li.textContent = `${item.query} =  ${item.result}`;
+
+            this.historyList.prepend(li);
+        });
+
+    }
+
 
     sendQuery(query) {
         this.evaluator.postMessage({
@@ -192,6 +216,7 @@ export class Calculator {
     handleResult(e) {
         if (e.data.success) {
             this.display.set(e.data.result);
+            this.history.push(e.data.query, e.data.result);
         }
         else {
             alert(`Error: ${e.data.error.message}`);

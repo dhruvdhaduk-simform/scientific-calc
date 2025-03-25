@@ -4,7 +4,7 @@ const HISTORY_LIMIT = 20;
 
 export class History {
 
-    constructor(key) {
+    constructor(key, onHistoryChange) {
         this.key = key;
 
         let storedHistory;
@@ -19,6 +19,9 @@ export class History {
             this.history = [];
             this.storeCurrentHistory();
         }
+
+        this.onHistoryChange = onHistoryChange;
+        this.onHistoryChange(this.history);
     }
 
     removeOldHistory() {
@@ -33,6 +36,7 @@ export class History {
         this.history.push({ query, result });
         this.removeOldHistory();
         this.storeCurrentHistory();
+        this.onHistoryChange(this.history);
     }
 
     getAll() {
