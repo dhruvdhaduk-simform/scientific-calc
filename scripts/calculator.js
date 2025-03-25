@@ -186,7 +186,6 @@ export class Calculator {
     }
 
     handleHistoryUpdate(h) {
-        console.log(this);
         this.historyList.innerHTML = "";
 
         if (!h.length) {
