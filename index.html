@@ -33,12 +33,18 @@
         <main>
 
             <div class="history-container">
-                <button class="history-btn">
+                <button class="history-btn" aria-label="History">
                     <img src="/assets/icons/history.svg" alt="History">
                 </button>
 
                 <div class="history-content">
-                    Calculation History Popup
+                    <p class="history-header">Calculation History</p>
+
+                    <ul id="history-list" class="history-list">
+                        <span>No history available</span>
+                    </ul>
+
+                    <button id="clear-history" class="clear-history" aria-label="Clear History">Clear History</button>
                 </div>
             </div>
 
