@@ -2,11 +2,12 @@
 
 import { Display } from "./display.js";
 import { Memory } from "./memory.js";
+import { History } from "./history.js";
 
 export class Calculator {
 
-    constructor(memoryKey, {
-        displayId, btnsId, degRanBtnId, fnModeBtnId, resultModeBtnId, sinBtnId, cosBtnId, tanBtnId
+    constructor(memoryKey, historyKey, {
+        displayId, btnsId, degRanBtnId, fnModeBtnId, resultModeBtnId, sinBtnId, cosBtnId, tanBtnId, historyListId, clearHistoryBtnId
     }) {
         this.display = new Display(displayId);
         this.btns = document.querySelector(`#${btnsId}`);
@@ -24,6 +25,11 @@ export class Calculator {
 
         this.memory = new Memory(memoryKey);
 
+        this.historyList = document.querySelector(`#${historyListId}`);
+        this.clearHistoryBtn = document.querySelector(`#${clearHistoryBtnId}`);
+
+        this.history = new History(historyKey, this.handleHistoryUpdate.bind(this));
+
         this.init();
     }
 
@@ -32,6 +38,7 @@ export class Calculator {
         this.btns.addEventListener("click", e => this.handleClickEvent(e), { signal: this.abortController.signal });
         document.addEventListener("keydown", e => this.handleKeyEvents(e), { signal: this.abortController.signal });
         this.evaluator.addEventListener("message", e => this.handleResult(e), { signal: this.abortController.signal });
+        this.clearHistoryBtn.addEventListener("click", () => this.history.clear(), { signal: this.abortController.signal });
     }
 
     // Handle click events from buttons using event delegation.
@@ -178,6 +185,25 @@ export class Calculator {
         }
     }
 
+    handleHistoryUpdate(history) {
+        this.historyList.innerHTML = "";
+
+        if (!history.length) {
+            this.historyList.innerHTML = `<li>[ No history available ]</li>`;
+            return;
+        }
+
+        history.forEach((item) => {
+            const li = document.createElement("li");
+            if (!li || !item?.query || !item?.result) return; 
+
+            li.textContent = `${item.query} =  ${item.result}`;
+
+            this.historyList.prepend(li);
+        });
+
+    }
+
 
     sendQuery(query) {
         this.evaluator.postMessage({
@@ -192,6 +218,8 @@ export class Calculator {
     handleResult(e) {
         if (e.data.success) {
             this.display.set(e.data.result);
+            if (e.data.query.toString() !== e.data.result.toString())
+                this.history.addEntry(e.data.query, e.data.result);
         }
         else {
             alert(`Error: ${e.data.error.message}`);

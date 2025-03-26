@@ -3,7 +3,7 @@
 import { Calculator } from "./calculator.js";
 
 // Initialize the calculator.
-let calculator = new Calculator("memoryKey", {
+let calculator = new Calculator("memoryKey", "historyKey", {
     displayId: "display-text",
     btnsId: "control",
     degRanBtnId: "deg-rad",
@@ -12,4 +12,6 @@ let calculator = new Calculator("memoryKey", {
     sinBtnId: "sin-btn",
     cosBtnId: "cos-btn",
     tanBtnId: "tan-btn",
+    historyListId: "history-list", 
+    clearHistoryBtnId: "clear-history",
 });
