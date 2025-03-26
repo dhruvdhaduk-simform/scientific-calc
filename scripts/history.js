@@ -6,6 +6,7 @@ export class History {
 
     constructor(key, onHistoryUpdate) {
         this.key = key;
+        this.onHistoryUpdate = onHistoryUpdate;
 
         let storedHistory;
         try {
@@ -14,14 +15,12 @@ export class History {
 
         if (storedHistory && Array.isArray(storedHistory)) {
             this.history = storedHistory;
-        }
-        else {
-            this.history = [];
-            this.saveHistory();
+            this.onHistoryUpdate (this.history);
+            return;
         }
 
-        this.onHistoryUpdate = onHistoryUpdate;
-        this.onHistoryUpdate (this.history);
+        this.history = [];
+        this.saveHistory();
     }
 
     removeOldHistory() {
