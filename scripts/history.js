@@ -17,7 +17,7 @@ export class History {
         }
         else {
             this.history = [];
-            this.storeCurrentHistory();
+            this.saveHistory();
         }
 
         this.onHistoryUpdate = onHistoryUpdate;
@@ -28,7 +28,7 @@ export class History {
         this.history.splice(0, this.history.length - HISTORY_LIMIT);
     }
 
-    storeCurrentHistory() {
+    saveHistory() {
         localStorage.setItem(this.key, JSON.stringify(this.history));
     }
 
@@ -37,7 +37,7 @@ export class History {
 
         this.history.push({ query, result });
         this.removeOldHistory();
-        this.storeCurrentHistory();
+        this.saveHistory();
         this.onHistoryUpdate(this.history);
     }
 
@@ -47,7 +47,7 @@ export class History {
 
     clear() {
         this.history = [];
-        this.storeCurrentHistory();
+        this.saveHistory();
         this.onHistoryUpdate(this.history);
     }
 }
