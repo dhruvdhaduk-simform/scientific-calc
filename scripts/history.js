@@ -32,7 +32,7 @@ export class History {
         localStorage.setItem(this.key, JSON.stringify(this.history));
     }
 
-    push(query, result) {
+    addEntry(query, result) {
         if (!query || !isFinite(result)) return;
 
         this.history.push({ query, result });
