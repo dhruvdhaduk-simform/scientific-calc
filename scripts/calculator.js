@@ -185,15 +185,15 @@ export class Calculator {
         }
     }
 
-    handleHistoryUpdate(h) {
+    handleHistoryUpdate(history) {
         this.historyList.innerHTML = "";
 
-        if (!h.length) {
+        if (!history.length) {
             this.historyList.innerHTML = `<li>[ No history available ]</li>`;
             return;
         }
 
-        h.forEach((item) => {
+        history.forEach((item) => {
             const li = document.createElement("li");
             if (!li || !item?.query || !item?.result) return; 
 
